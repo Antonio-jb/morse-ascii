@@ -77,7 +77,7 @@ public class MorseAscii {
 
         MorseAscii morse = new MorseAscii("");
         morse.setInputText();
-        System.out.println("\nTraducción:");
+        System.out.println("\n•Traducción:");
         morse.morseToAscii();
     }
 }
