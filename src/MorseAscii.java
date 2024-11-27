@@ -73,12 +73,82 @@ public class MorseAscii {
         }
     }
 
-    public static void main(String[] args) {
+    static HashMap<String, String> asciiMorse = new HashMap<>();
 
-        MorseAscii morse = new MorseAscii("");
-        morse.setInputText();
-        System.out.println("\n•Traducción:");
-        morse.morseToAscii();
+    static{
+        asciiMorse.put("A", ".-");
+        asciiMorse.put("B", "-...");
+        asciiMorse.put("C", "-.-.");
+        asciiMorse.put("D", "-..");
+        asciiMorse.put("E", ".");
+        asciiMorse.put("F", "..-.");
+        asciiMorse.put("G", "--.");
+        asciiMorse.put("H", "....");
+        asciiMorse.put("I", "..");
+        asciiMorse.put("J", ".---");
+        asciiMorse.put("K", "-.-");
+        asciiMorse.put("L", ".-..");
+        asciiMorse.put("M", "--");
+        asciiMorse.put("N", "-.");
+        asciiMorse.put("O", "---");
+        asciiMorse.put("P", ".--.");
+        asciiMorse.put("Q", "--.-");
+        asciiMorse.put("R", ".-.");
+        asciiMorse.put("S", "...");
+        asciiMorse.put("T", "-");
+        asciiMorse.put("U", "..-");
+        asciiMorse.put("V", "...-");
+        asciiMorse.put("W", ".--");
+        asciiMorse.put("X", "-..-");
+        asciiMorse.put("Y", "-.--");
+        asciiMorse.put("Z", "--..");
+        asciiMorse.put("Ñ", ".----.");
+        asciiMorse.put(" ", "/");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean seguir = true;
+        while (seguir) {
+            System.out.println("1. Traducir de texto a código Morse");
+            System.out.println("2. Traducir de código Morse a texto");
+            System.out.println("3. Salir");
+            int numero = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (numero) {
+                case 1:
+                    System.out.println("introduce una palabra para traducir a codigo Morse:");
+                    String palabra = scanner.nextLine().toUpperCase();
+                    StringBuilder morse = new StringBuilder();
+
+                    for (int i = 0; i < palabra.length(); i++) {
+                        String letra = String.valueOf(palabra.charAt(i));
+                        if (asciiMorse.containsKey(letra)) {
+                            morse.append(asciiMorse.get(letra)).append(" ");
+                        } else {
+                            System.out.println("caracter no soportado: " + letra);
+                        }
+                    }
+
+                    System.out.println("traduccion a Morse: " + morse.toString().trim());
+                    break;
+
+                case 2:
+                    MorseAscii morseToText = new MorseAscii("");
+                    morseToText.setInputText();
+                    System.out.println("Traducción a texto:");
+                    morseToText.morseToAscii();
+                    break;
+
+                case 3:
+                    seguir = false;
+                    break;
+
+                default:
+                    System.out.println("Elige un numero valido.");
+            }
+        }
     }
 }
 
